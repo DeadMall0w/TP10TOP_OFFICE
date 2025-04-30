@@ -1,3 +1,5 @@
-Client BRIANT15 - 213456987 - (PU = 0) :: 0
-10 - 231698547 - (PU = 0) :: 0
-10 - 321789654 - (PU = 0) :: 0
+Client BRIANT
+15 - boite_punaises - (PU = 3.50) :: 52.50
+10 - boite_trombones - (PU = 4.10) :: 41.00
+10 - boite_100enveloppes11*13 - (PU = 8.80) :: 88.00
+				TOTAL = 181.50 €

@@ -1,3 +1,5 @@
-Client DUPONT45 - 213456987 - (PU = 0) :: 0
-15 - 231698547 - (PU = 0) :: 0
-80 - 321789654 - (PU = 0) :: 0
+Client DUPONT
+45 - boite_punaises - (PU = 3.50) :: 157.50
+15 - boite_trombones - (PU = 4.10) :: 61.50
+80 - boite_100enveloppes11*13 - (PU = 8.80) :: 704.00
+				TOTAL = 923.00 €

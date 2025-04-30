@@ -5,25 +5,48 @@
 #include <string.h>
 #include "prod.h"
 
+double rechercheProduit(int* pRef, char  *lib)
+{
+	int laRef; double prix;
+	FILE *fp = NULL;
+	fp = fopen("produits.txt","r");
+	if ( fp!=NULL ) 
+	{
+		do {
+			fscanf( fp,"%d %s %lf",&laRef,lib,&prix);
+			if (laRef==*pRef) {
+				fclose(fp);
+				return prix;
+			}
+		}
+		while(!feof(fp));
+	}
+	return prix;
+}
+
 void LireCommande(FILE * fc, char * suf){
 	char nomFichier[100] = "factures/facture";
+	char libelle[50];
+	double pu, TOTAL = 0;
 	strcat(nomFichier, suf);
 	strcat(nomFichier, ".txt");
 	FILE *facture=fopen(nomFichier,"w");
 
 	char nomClient[50];
 	int ref, qtt;
-
+	
 	// écriture du nom du client
 	fscanf(fc, "%s\n", nomClient);
 	
-	fprintf(facture, "Client %s", nomClient);
+	fprintf(facture, "Client %s\n", nomClient);
 	do{
 		fscanf(fc, "%d %d", &ref, &qtt);
 		printf("\n %d-%d", ref, qtt);
-		fprintf(facture, "%d - %d - (PU = %d) :: %d\n", qtt, ref, 0, 0);
+		pu = rechercheProduit(&ref, libelle);
+		fprintf(facture, "%d - %s - (PU = %.2lf) :: %.2lf\n", qtt, libelle, pu, qtt*pu);
+		TOTAL += qtt*pu;
 	} while (!feof(fc));
-	
+	fprintf(facture, "\t\t\t\tTOTAL = %.2lf €\n", TOTAL);
 }
 
 

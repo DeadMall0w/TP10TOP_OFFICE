@@ -1,5 +1,7 @@
-Client DUPONT10 - 123548796 - (PU = 0) :: 0
-25 - 231546987 - (PU = 0) :: 0
-35 - 321469785 - (PU = 0) :: 0
-60 - 312589647 - (PU = 0) :: 0
-50 - 312698547 - (PU = 0) :: 0
+Client DUPONT
+10 - crayon - (PU = 1.20) :: 12.00
+25 - agrafeuse - (PU = 5.60) :: 140.00
+35 - ramette_feuillesA4 - (PU = 9.90) :: 346.50
+60 - boite_100enveloppes11*21 - (PU = 8.70) :: 522.00
+50 - boite_100enveloppes30*21 - (PU = 14.70) :: 735.00
+				TOTAL = 1755.50 €
