@@ -6,12 +6,22 @@
 #include "prod.h"
 
 void LireCommande(FILE * fc, char * suf){
+	char nomFichier[100] = "factures/facture";
+	strcat(nomFichier, suf);
+	strcat(nomFichier, ".txt");
+	FILE *facture=fopen(nomFichier,"w");
+
 	char nomClient[50];
 	int ref, qtt;
-	fscanf(fc, "%s", nomClient);
+
+	// écriture du nom du client
+	fscanf(fc, "%s\n", nomClient);
+	
+	fprintf(facture, "Client %s", nomClient);
 	do{
 		fscanf(fc, "%d %d", &ref, &qtt);
 		printf("\n %d-%d", ref, qtt);
+		fprintf(facture, "%d - %d - (PU = %d) :: %d\n", qtt, ref, 0, 0);
 	} while (!feof(fc));
 	
 }
@@ -20,13 +30,18 @@ void LireCommande(FILE * fc, char * suf){
 
 int lireProchaineCommande() //pour lire l'int contenu dans nextFact
 {
-FILE *f;
-int N;
-f=fopen("nextFact","r");
-fread(&N,sizeof(int),1,f);
-fclose(f);
-//printf("\n--->lu N=%d",N);
-return N;
+	FILE *f;
+	int N;
+	f=fopen("nextFact","r");
+	fread(&N,sizeof(int),1,f);
+	fclose(f);
+	//printf("\n--->lu N=%d",N);
+	return N;
+}
+
+
+void EcrireCommande(){
+
 }
 
 void convertirNenChaine4(int N,char *N4) //convertit l'int N en une chaine de 4 caracteres
