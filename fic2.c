@@ -74,4 +74,3 @@ T_chaine leTableauDesLignes[NB_LIGNES_MAX_DU_POEME+1];
 
 	return 0;
 }
-

@@ -5,6 +5,19 @@
 #include <string.h>
 #include "prod.h"
 
+void LireCommande(FILE * fc, char * suf){
+	char nomClient[50];
+	int ref, qtt;
+	fscanf(fc, "%s", nomClient);
+	do{
+		fscanf(fc, "%d %d", &ref, &qtt);
+		printf("\n %d-%d", ref, qtt);
+	} while (!feof(fc));
+	
+}
+
+
+
 int lireProchaineCommande() //pour lire l'int contenu dans nextFact
 {
 FILE *f;
@@ -54,7 +67,7 @@ do //ce do while prend fin dès que fichier commandeXXXX.txt est absent
 	if (ficCommande!=NULL)
 		{ // le fichier commandeNNNN.txt existe
 			printf("\n fichier %s present",nomCommande);
-			// lireCommande(nomCommande, NNNN); // à vous de coder cette fonction lors de ce TP9
+			LireCommande(ficCommande, NNNN); // à vous de coder cette fonction lors de ce TP9
 			fclose(ficCommande);
 		}
 	else
