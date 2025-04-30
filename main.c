@@ -4,7 +4,19 @@
 #include <stdlib.h>
 #include <string.h>
 #include "prod.h"
+#include "math.h"
 
+
+struct Achat {   // Structure declaration
+	int id;           // Member (int variable)
+	int qtt;       // Member (char variable)
+}typedef Achat;
+
+
+
+int SIZE(int nb){
+	return floor(log10(abs(nb)))+1;
+}
 double rechercheProduit(int* pRef, char  *lib)
 {
 	int laRef; double prix;
@@ -22,6 +34,69 @@ double rechercheProduit(int* pRef, char  *lib)
 		while(!feof(fp));
 	}
 	return prix;
+}
+
+void UpdateStockFSEEK(Achat achat, int nbAchat){
+	FILE *file = fopen("stock.txt", "r+");
+   if (file == NULL) {
+       perror("Error opening file");
+   }
+
+   fseek(file, 0, SEEK_SET);  // aller au début du fichier
+
+   int flag = 0; // 0 reading ref, 1 reading space, 2 reading qtt
+   char refAchat[11] = "";
+   
+   sprintf(refAchat, "%d", achat.id);
+   printf("%s\n", refAchat);
+   char tmp[3] = "";
+   char ref[11] = "";
+ 
+   char ch;
+    do
+	{
+		char ch = fgetc(file); // on recup le prochain caractère
+		if(flag == 0){ // On lit l'id du produit
+			if (ch == ' '){ // Si c'est un espace c'est qu'on a fini de lire
+				// fgetc(file);
+				if (strcmp(refAchat, ref) == 0){
+					printf("FOUND ! \n");
+					int nb = achat.qtt;
+					char toWrite[8] = "";
+					sprintf(toWrite, "%d", nb);
+					int taille = SIZE(nb);
+					for (int i = taille; i < 8; i++)
+					{
+						strcat(toWrite, " ");
+					}
+					
+					fwrite(toWrite, 1, 8, file);
+					flag = 10; 
+				}
+
+				flag = 1;
+				continue;
+			}
+			tmp[0] = ch;
+			tmp[1] = '\0';
+			strcat(ref, tmp);
+		}
+		
+		if(ch == '\n'){
+			// printf("reset %s \n", ref);
+			strcpy(ref, "");
+			flag = 0;
+		}
+		// printf("%c",ch);
+	} while (!feof(file));
+
+
+
+
+
+   fclose(file);
+//    return 0;
+
 }
 
 void LireCommande(FILE * fc, char * suf){
@@ -134,7 +209,13 @@ int main()
 	f=fopen("nextFact","w");
 	fwrite(&N,1,sizeof(int),f);
 	fclose(f);
+
+	Achat achat;
+	achat.id = 231698547;
+	achat.qtt = 10;
+
  	
+	UpdateStockFSEEK(achat, 2);
 
 	//PARTIE 1 du TP : sans Gestion de stock
 	lireLesCommandes(); //lecture de tous les fichiers commandeXXX.txt (fichiers non traités jusqu'ici)	
