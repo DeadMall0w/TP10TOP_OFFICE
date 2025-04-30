@@ -54,7 +54,7 @@ do //ce do while prend fin dès que fichier commandeXXXX.txt est absent
 	if (ficCommande!=NULL)
 		{ // le fichier commandeNNNN.txt existe
 			printf("\n fichier %s present",nomCommande);
-			//lireCommande(nomCommande); // à vous de coder cette fonction lors de ce TP9
+			// lireCommande(nomCommande, NNNN); // à vous de coder cette fonction lors de ce TP9
 			fclose(ficCommande);
 		}
 	else
